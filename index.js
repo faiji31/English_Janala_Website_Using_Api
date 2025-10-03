@@ -8,11 +8,22 @@ const loadlevelword=(id)=>{
     const url =`https://openapi.programming-hero.com/api/level/${id}`;
     fetch(url)
     .then(res=>res.json())
-    .then((data)=> displaylevelword(data.data))
+    .then((data)=>{
+        removeactive();
+        const clickBtn = document.getElementById(`lesson-btn-${id}`)
+        clickBtn.classList.add('active')
+        displaylevelword(data.data)
+    })
 
    
-
+    
 };
+const removeactive=()=>{
+    const lessonbutton = document.querySelectorAll('.lesson-btn')
+    lessonbutton.foreach=(btn=>btn.classList.remove('active'));
+    
+}
+
 
 const displaylevelword =(words)=>{
     const wordDisplaycontainer = document.getElementById('word-container')
@@ -40,7 +51,7 @@ const displaylevelword =(words)=>{
         <div class="font-bangla font-medium text-2xl">"${word.meaning ? word.meaning:"শব্দ পাওয়া যায় নি"} / ${word.pronunciation ? word.pronunciation:"শব্দ পাওয়া যায় নি"}"</div>
 
         <div class="flex justify-between items-center">
-          <button class="btn bg-[#1A91FF10] hover:bg-[##1A91FF80]"><i class="fa-solid fa-circle-info"></i></button>
+          <button lesson-btn  class="btn bg-[#1A91FF10] hover:bg-[##1A91FF80]"><i class="fa-solid fa-circle-info"></i></button>
            <button class="btn bg-[#1A91FF10]hover:bg-[##1A91FF80] "><i class="fa-solid fa-volume-high"></i></i></button>
 
         </div>
@@ -59,7 +70,7 @@ displaylesson=(lessons)=>{
         const btndiv = document.createElement('div')
         btndiv.innerHTML=`
         
-        <button onclick="loadlevelword(${lesson.level_no})"  class="btn btn-outline btn-primary"><i class="fa-solid fa-book-open"></i> Lesson-${lesson.level_no}</button>
+        <button id="lesson-btn-${lesson.level_no}" onclick="loadlevelword(${lesson.level_no})"  class="btn btn-outline btn-primary"><i class="fa-solid fa-book-open"></i> Lesson-${lesson.level_no}</button>
 
         
         
