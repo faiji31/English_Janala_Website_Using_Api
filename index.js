@@ -18,6 +18,17 @@ const displaylevelword =(words)=>{
     const wordDisplaycontainer = document.getElementById('word-container')
     wordDisplaycontainer.innerHTML="";
 
+    if(words.length===0){
+        wordDisplaycontainer.innerHTML=`<div class=" text-center space-y-3 col-span-full">
+         <img class="mx-auto" src="assets/alert-error.png" alt="">
+       <p class="tet-[14px] font-normal font-bangla text-gray-400"> এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+       <h2 class="font-bangla text-[35px] font-medium text-center ">নেক্সট Lesson এ যান</h2>
+      </div>
+        
+        
+        `
+    }
+
      words.forEach(word=>{
         console.log(word)
 
